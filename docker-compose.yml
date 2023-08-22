@@ -1,24 +1,16 @@
 version: '3'
 services:
 
-  backend:
-    # image: xxxxxx:1.0
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+
+  nginx:
+    image: nginx:1.25
     ports:
-      - '4000:4000' #HOST PORT:CONTAINER PORT (OUTSIDE:INSIDE) [Default: 3000]
+      - "4000:4000"
     volumes:
-      - ./backend/config.js:/app/config.js
-    environment:
-      - DB_CONNECTION_LIMIT=10
-      - DB_HOST=host.docker.internal #mysql HOST 
-      - DB_PORT=4002 #mysql HOST PORT [Default: 3306]
-      - DB_USER=admin #mysql username (Permission: Read/Write database)
-      - DB_PASSWORD=1234 #mysql password
-      - DB_DATABASE=basic_laundromat #mysql database name
-      - LINE_CHANNEL_ACCESS_TOKEN=O8sXKFqYykzebR47FuKiGbfmkacA9gz/taffAVmz+XpfxLSpJu/+SYZx6FCwUk57NpdJNj/U8lycHLetTGbB6axesr2GLdFEl4NJ9NNPMj45toX6qFDlLHaw16oXGZxwx9QLfQZSyR+uJPZdfKeDpgdB04t89/1O/w1cDnyilFU=
-    restart: unless-stopped
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend-1
+      # - backend-2
 
   adminer:
     image: adminer:4-standalone
@@ -41,6 +33,44 @@ services:
     volumes:
       - ./db_scripts:/docker-entrypoint-initdb.d
       - mysql-volume:/var/lib/mysql
+
+  backend-1:
+    # image: xxxxxx:1.0
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - '5001:3000' #HOST PORT:CONTAINER PORT (OUTSIDE:INSIDE) [Default: 3000]
+    volumes:
+      - ./backend/config.js:/app/config.js
+    environment:
+      - DB_CONNECTION_LIMIT=10
+      - DB_HOST=host.docker.internal #mysql HOST 
+      - DB_PORT=4002 #mysql HOST PORT [Default: 3306]
+      - DB_USER=admin #mysql username (Permission: Read/Write database)
+      - DB_PASSWORD=1234 #mysql password
+      - DB_DATABASE=basic_laundromat #mysql database name
+      - LINE_CHANNEL_ACCESS_TOKEN=O8sXKFqYykzebR47FuKiGbfmkacA9gz/taffAVmz+XpfxLSpJu/+SYZx6FCwUk57NpdJNj/U8lycHLetTGbB6axesr2GLdFEl4NJ9NNPMj45toX6qFDlLHaw16oXGZxwx9QLfQZSyR+uJPZdfKeDpgdB04t89/1O/w1cDnyilFU=
+    restart: unless-stopped
+
+  # backend-2:
+  #   # image: xxxxxx:1.0
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - '5002:3000' #HOST PORT:CONTAINER PORT (OUTSIDE:INSIDE) [Default: 3000]
+  #   volumes:
+  #     - ./backend/config.js:/app/config.js
+  #   environment:
+  #     - DB_CONNECTION_LIMIT=10
+  #     - DB_HOST=host.docker.internal #mysql HOST 
+  #     - DB_PORT=4002 #mysql HOST PORT [Default: 3306]
+  #     - DB_USER=admin #mysql username (Permission: Read/Write database)
+  #     - DB_PASSWORD=1234 #mysql password
+  #     - DB_DATABASE=basic_laundromat #mysql database name
+  #     - LINE_CHANNEL_ACCESS_TOKEN=O8sXKFqYykzebR47FuKiGbfmkacA9gz/taffAVmz+XpfxLSpJu/+SYZx6FCwUk57NpdJNj/U8lycHLetTGbB6axesr2GLdFEl4NJ9NNPMj45toX6qFDlLHaw16oXGZxwx9QLfQZSyR+uJPZdfKeDpgdB04t89/1O/w1cDnyilFU=
+  #   restart: unless-stopped
 
 volumes:
   mysql-volume:

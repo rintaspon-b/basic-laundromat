@@ -1,6 +1,6 @@
 module.exports = {
   basic: {
-    port: 4000,
+    port: 3000,
   },
 
   notification: {
