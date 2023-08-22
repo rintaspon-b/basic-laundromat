@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS machine (
 
 -- Insert sample data
 INSERT INTO machine (image, min_price, process_time_sec, status) VALUES
-  ('m1.png', 50, 90, 'PROCESSING'),
-  ('m2.png', 100, 90, 'IDLE'),
-  ('m3.png', 50, 90, 'PROCESSING'),
-  ('m4.png', 40, 90, 'IDLE'),
-  ('m4.png', 20, 90, 'PROCESSING');
+  ('https://iili.io/Hp8jR3P.png', 50, 90, 'IDLE'),
+  ('https://iili.io/Hp8jTGV.png', 100, 150, 'IDLE'),
+  ('https://iili.io/Hp8ju6B.png', 50, 90, 'IDLE'),
+  ('https://iili.io/Hp8j5a1.png', 60, 70, 'IDLE'),
+  ('https://iili.io/Hp8j78F.png', 35, 65, 'IDLE');
