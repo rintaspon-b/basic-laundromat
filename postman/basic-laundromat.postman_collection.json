@@ -67,6 +67,42 @@
 			"response": []
 		},
 		{
+			"name": "/api/line/test",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QifSwiaWF0IjoxNjkyNjk5ODEwLCJleHAiOjE2OTI3Mjg2MTB9.Po4A-cZYK9sq1Xc0Y0VmZu51JfhIXbzIzPK-Qh3Z8w4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/line/test?useTimer=true",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"line",
+						"test"
+					],
+					"query": [
+						{
+							"key": "useTimer",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "/api/machines",
 			"request": {
 				"auth": {

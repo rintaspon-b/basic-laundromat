@@ -1,6 +1,7 @@
 module.exports = {
   basic: {
     port: 4000,
+    notifyBeforeTimeout: 60, // unit = seconds
   },
 
   authorizer: {

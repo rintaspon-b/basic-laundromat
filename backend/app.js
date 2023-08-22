@@ -26,13 +26,20 @@ app.get("/api/test", authorize, (req, res) => {
   res.json(responseData);
 });
 
-
 app.get("/api/line/test", authorize, (req, res) => {
+  const useTimer = req.query.useTimer;
   const message = {
     type: "text",
     text: "Test message from basic-laundromat app",
   };
-  notifyLineGroupMessage(message, res)
+  const processTime = 70 * 1000;  // To miliseconds
+  let notifyTime = 0;
+  if (useTimer == "true") {
+    notifyTime = processTime - (config.basic.notifyBeforeTimeout * 1000); // To miliseconds
+  }
+  setTimeout(() => {
+    notifyLineGroupMessage(message, res);
+  }, notifyTime);
   res.json(message);
 });
 
