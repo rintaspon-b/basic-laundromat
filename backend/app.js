@@ -119,7 +119,7 @@ app.post("/api/machine/start", authorize, (req, res) => {
     }, notifyTime);
 
     res.json({
-      message: `[START] Update status of machine [${id}] to [PROCESSING] and it will complete task in next ${
+      message: `[START] Update status of machine [${id}] to [PROCESSING] and it will send a notification in next ${
         notifyTime / 1000
       } second(s)`,
     });
