@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS machine (
 
 -- Insert sample data
 INSERT INTO machine (image, min_price, process_time_sec, status) VALUES
-  ('https://drive.google.com/uc?export=view&id=1XaLwHVRT6GdRSlyKqzgjwTpARcz2H5UG', 50, 90, 'IDLE'),
-  ('https://drive.google.com/uc?export=view&id=1mqvt5GuoO15vOcSmgA_k6IZg9Sc_JBbr', 100, 150, 'IDLE'),
-  ('https://drive.google.com/uc?export=view&id=1P9vUx61KAoNh6H8XHim6bp4aEBcNNyqk', 50, 90, 'IDLE'),
-  ('https://drive.google.com/uc?export=view&id=1oU_wOcc3-YxtliJTJFbkvmDpcoTQDLS3', 60, 70, 'IDLE'),
-  ('https://drive.google.com/uc?export=view&id=1F3mHAEQisKBIwFeHMS5QEoE2haTxHOQs', 35, 65, 'IDLE');
+  ('https://iili.io/Hp8jR3P.png', 50, 90, 'IDLE'),
+  ('https://iili.io/Hp8jTGV.png', 100, 150, 'IDLE'),
+  ('https://iili.io/Hp8ju6B.png', 50, 90, 'IDLE'),
+  ('https://iili.io/Hp8j5a1.png', 60, 70, 'IDLE'),
+  ('https://iili.io/Hp8j78F.png', 35, 65, 'IDLE');

@@ -1,7 +1,5 @@
 version: '3'
 services:
-
-
   nginx:
     image: nginx:1.25
     ports:
@@ -71,6 +69,17 @@ services:
   #     - DB_DATABASE=basic_laundromat #mysql database name
   #     - LINE_CHANNEL_ACCESS_TOKEN=O8sXKFqYykzebR47FuKiGbfmkacA9gz/taffAVmz+XpfxLSpJu/+SYZx6FCwUk57NpdJNj/U8lycHLetTGbB6axesr2GLdFEl4NJ9NNPMj45toX6qFDlLHaw16oXGZxwx9QLfQZSyR+uJPZdfKeDpgdB04t89/1O/w1cDnyilFU=
   #   restart: unless-stopped
+
+  frontend:
+    # image: xxxxxx:1.0
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - '3000:80' #HOST PORT:CONTAINER PORT (OUTSIDE:INSIDE) [Default: 80]
+    environment:
+      - REACT_APP_API_PATH=localhost:4000 #backend HOST PORT
+    restart: unless-stopped #AUTO RESTART CONTAINER
 
 volumes:
   mysql-volume:
