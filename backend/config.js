@@ -1,6 +1,10 @@
 module.exports = {
   basic: {
     port: 4000,
+  },
+
+  notification: {
+    message: "Your laundry is fresh and ready in 60 seconds! 🧺✨",
     notifyBeforeTimeout: 60, // unit = seconds
   },
 

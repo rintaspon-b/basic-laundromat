@@ -32,10 +32,10 @@ app.get("/api/line/test", authorize, (req, res) => {
     type: "text",
     text: "Test message from basic-laundromat app",
   };
-  const processTime = 70 * 1000;  // To miliseconds
+  const processTime = 70 * 1000; // To miliseconds
   let notifyTime = 0;
   if (useTimer == "true") {
-    notifyTime = processTime - (config.basic.notifyBeforeTimeout * 1000); // To miliseconds
+    notifyTime = processTime - config.notification.notifyBeforeTimeout * 1000; // To miliseconds
   }
   setTimeout(() => {
     notifyLineGroupMessage(message, res);
@@ -94,8 +94,34 @@ app.post("/api/machine/start", authorize, (req, res) => {
       console.error("Error executing query:", error);
       return res.status(500).json({ error: "Internal Server Error" });
     }
+
+    const processTime = req.body.processTime * 1000; // To miliseconds
+    const notifyTime =
+      processTime - config.notification.notifyBeforeTimeout * 1000; // To miliseconds
+    setTimeout(() => {
+      notifyLineGroupMessage(
+        {
+          type: "text",
+          text: `[machine:${id}] ${config.notification.message}`,
+        },
+        res
+      );
+      setTimeout(() => {
+        const sql = `UPDATE machine SET status = 'IDLE' WHERE id = ?;`;
+        pool.query(sql, [id], (error) => {
+          if (error) {
+            console.error("Error executing query:", error);
+            return;
+          }
+          console.log(`[STOP] Update status of machine [${id}] to [IDLE]`);
+        });
+      }, processTime);
+    }, notifyTime);
+
     res.json({
-      message: `[START] Update status of machine [${id}] to [PROCESSING]`,
+      message: `[START] Update status of machine [${id}] to [PROCESSING] and it will complete task in next ${
+        notifyTime / 1000
+      } second(s)`,
     });
   });
 });
