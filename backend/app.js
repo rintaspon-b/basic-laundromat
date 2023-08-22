@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 const authorize = require("./authorizationMiddleware");
+const notifyLineGroupMessage = require("./lineConnector");
 
 const pool = mysql.createPool(config.database);
 const port = config.basic.port;
@@ -23,6 +24,16 @@ app.get("/api/test", authorize, (req, res) => {
   const responseData = {};
   responseData.id = id;
   res.json(responseData);
+});
+
+
+app.get("/api/line/test", authorize, (req, res) => {
+  const message = {
+    type: "text",
+    text: "Test message from basic-laundromat app",
+  };
+  notifyLineGroupMessage(message, res)
+  res.json(message);
 });
 
 app.get("/api/token", (req, res) => {

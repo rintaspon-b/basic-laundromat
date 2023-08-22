@@ -17,6 +17,7 @@ services:
       - DB_USER=admin #mysql username (Permission: Read/Write database)
       - DB_PASSWORD=1234 #mysql password
       - DB_DATABASE=basic_laundromat #mysql database name
+      - LINE_CHANNEL_ACCESS_TOKEN=O8sXKFqYykzebR47FuKiGbfmkacA9gz/taffAVmz+XpfxLSpJu/+SYZx6FCwUk57NpdJNj/U8lycHLetTGbB6axesr2GLdFEl4NJ9NNPMj45toX6qFDlLHaw16oXGZxwx9QLfQZSyR+uJPZdfKeDpgdB04t89/1O/w1cDnyilFU=
     restart: unless-stopped
 
   adminer:

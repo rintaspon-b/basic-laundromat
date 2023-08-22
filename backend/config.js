@@ -16,4 +16,8 @@ module.exports = {
     password: process.env.DB_PASSWORD || "1234",
     database: process.env.DB_DATABASE || "basic_laundromat",
   },
+
+  line: {
+    channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN  || "O8sXKFqYykzebR47FuKiGbfmkacA9gz/taffAVmz+XpfxLSpJu/+SYZx6FCwUk57NpdJNj/U8lycHLetTGbB6axesr2GLdFEl4NJ9NNPMj45toX6qFDlLHaw16oXGZxwx9QLfQZSyR+uJPZdfKeDpgdB04t89/1O/w1cDnyilFU=",
+  },
 };
