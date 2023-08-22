@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS machine (
 
 -- Insert sample data
 INSERT INTO machine (image, min_price, process_time_sec, status) VALUES
-  ('m1.png', 50, 90, 'PROCESSING'),
-  ('m2.png', 100, 90, 'IDLE'),
-  ('m3.png', 50, 90, 'PROCESSING'),
-  ('m4.png', 40, 90, 'IDLE'),
-  ('m4.png', 20, 90, 'PROCESSING');
+  ('https://drive.google.com/uc?export=view&id=1XaLwHVRT6GdRSlyKqzgjwTpARcz2H5UG', 50, 90, 'IDLE'),
+  ('https://drive.google.com/uc?export=view&id=1mqvt5GuoO15vOcSmgA_k6IZg9Sc_JBbr', 100, 150, 'IDLE'),
+  ('https://drive.google.com/uc?export=view&id=1P9vUx61KAoNh6H8XHim6bp4aEBcNNyqk', 50, 90, 'IDLE'),
+  ('https://drive.google.com/uc?export=view&id=1oU_wOcc3-YxtliJTJFbkvmDpcoTQDLS3', 60, 70, 'IDLE'),
+  ('https://drive.google.com/uc?export=view&id=1F3mHAEQisKBIwFeHMS5QEoE2haTxHOQs', 35, 65, 'IDLE');

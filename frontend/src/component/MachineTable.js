@@ -27,12 +27,13 @@ function MachineTable({ machines }) {
       dataIndex: "image",
       key: "image",
       align: "center",
-    },
-    {
-      title: "Price",
-      dataIndex: "min_price",
-      key: "min_price",
-      align: "center",
+      render: (image) => (
+        <img
+          src={image} // Assuming "image" field contains the image URL
+          alt="Machine"
+          style={{ maxWidth: "50px", maxHeight: "50px" }} // Adjust the size as needed
+        />
+      ),
     },
     {
       title: "Coin pool",
@@ -49,6 +50,12 @@ function MachineTable({ machines }) {
         const pool = pools.find((pool) => pool.id === text);
         return <div>{pool.pool}</div>;
       },
+    },
+    {
+      title: "Price",
+      dataIndex: "min_price",
+      key: "min_price",
+      align: "center",
     },
     {
       title: "Process time (seconds)",
