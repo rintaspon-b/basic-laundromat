@@ -39,7 +39,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QifSwiaWF0IjoxNjkyNjg4OTIzLCJleHAiOjE2OTI2OTI1MjN9.CnwHMzLmWplotr5AmUVP-VRVISAveCd6FWI6u8ZSxXs",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QifSwiaWF0IjoxNjkyNjkzNDY0LCJleHAiOjE2OTI2OTcwNjR9.f3OeEA5z3lEZKcsv4lNaDGALY-ar-QzpyH0GfEE5DDg",
 							"type": "string"
 						}
 					]
@@ -74,7 +74,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QifSwiaWF0IjoxNjkyNjg4OTIzLCJleHAiOjE2OTI2OTI1MjN9.CnwHMzLmWplotr5AmUVP-VRVISAveCd6FWI6u8ZSxXs",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QifSwiaWF0IjoxNjkyNjk3MjAxLCJleHAiOjE2OTI3MjYwMDF9.LePdRIkYB0t3VW6aTpAmUoetdUTyG5MANfrH3AeBvMY",
 							"type": "string"
 						}
 					]
@@ -96,14 +96,14 @@
 			"response": []
 		},
 		{
-			"name": "/api/start",
+			"name": "/api/machine",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QifSwiaWF0IjoxNjkyNjg4OTIzLCJleHAiOjE2OTI2OTI1MjN9.CnwHMzLmWplotr5AmUVP-VRVISAveCd6FWI6u8ZSxXs",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QifSwiaWF0IjoxNjkyNjk3MjAxLCJleHAiOjE2OTI3MjYwMDF9.LePdRIkYB0t3VW6aTpAmUoetdUTyG5MANfrH3AeBvMY",
 							"type": "string"
 						}
 					]
@@ -112,7 +112,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : 1\r\n}",
+					"raw": "{\r\n    \"image\": \"m6.png\",\r\n    \"min_price\": 50,\r\n    \"process_time_sec\": 90\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -120,13 +120,52 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4000/api/start",
+					"raw": "localhost:4000/api/machine",
 					"host": [
 						"localhost"
 					],
 					"port": "4000",
 					"path": [
 						"api",
+						"machine"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/machine/start",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QifSwiaWF0IjoxNjkyNjk3MjAxLCJleHAiOjE2OTI3MjYwMDF9.LePdRIkYB0t3VW6aTpAmUoetdUTyG5MANfrH3AeBvMY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/machine/start",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"machine",
 						"start"
 					]
 				}
@@ -134,14 +173,14 @@
 			"response": []
 		},
 		{
-			"name": "/api/stop",
+			"name": "/api/machine/stop",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QifSwiaWF0IjoxNjkyNjg4OTIzLCJleHAiOjE2OTI2OTI1MjN9.CnwHMzLmWplotr5AmUVP-VRVISAveCd6FWI6u8ZSxXs",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QifSwiaWF0IjoxNjkyNjk3MjAxLCJleHAiOjE2OTI3MjYwMDF9.LePdRIkYB0t3VW6aTpAmUoetdUTyG5MANfrH3AeBvMY",
 							"type": "string"
 						}
 					]
@@ -150,7 +189,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\" : 1\r\n}",
+					"raw": "{\r\n    \"id\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -158,14 +197,53 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4000/api/stop",
+					"raw": "localhost:4000/api/machine/stop",
 					"host": [
 						"localhost"
 					],
 					"port": "4000",
 					"path": [
 						"api",
+						"machine",
 						"stop"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/machine/delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QifSwiaWF0IjoxNjkyNjk3MjAxLCJleHAiOjE2OTI3MjYwMDF9.LePdRIkYB0t3VW6aTpAmUoetdUTyG5MANfrH3AeBvMY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/machine",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"machine"
 					]
 				}
 			},

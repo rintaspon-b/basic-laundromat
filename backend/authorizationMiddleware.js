@@ -11,7 +11,7 @@ function authorize(req, res, next) {
       token.replace("Bearer ", ""),
       config.authorizer.secret
     ); // Verify jwt
-    console.log("authorized success: " + decoded.user.id);
+    // console.log("authorized success: " + decoded.user.id);
     next();
   } catch (err) {
     return res.status(401).json({ message: err });

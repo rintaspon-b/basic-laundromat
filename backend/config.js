@@ -5,6 +5,7 @@ module.exports = {
 
   authorizer: {
     secret: "basic-laundromat-app-secret",
+    expire: "8h"
   },
 
   database: {

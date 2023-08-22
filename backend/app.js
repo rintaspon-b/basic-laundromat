@@ -30,7 +30,7 @@ app.get("/api/token", (req, res) => {
   // find user by userid..
   const user = { id: 1, username: "test" };
   const token = jwt.sign({ user }, config.authorizer.secret, {
-    expiresIn: "1h",
+    expiresIn: config.authorizer.expire,
   });
   res.json({ token });
 });
@@ -49,16 +49,67 @@ app.get("/api/machines", authorize, (req, res) => {
   });
 });
 
-app.post("/api/start", authorize, (req, res) => {
-  const id = req.body?.id;
-  console.log(`machine ${id} starts`);
-  res.json({ message: `machine [${id}] starts` });
+// CREATE / UPDATE machine except its status
+app.post("/api/machine", authorize, (req, res) => {
+  const machine = req.body;
+  const sql = `INSERT INTO machine (id, image, min_price, process_time_sec) VALUES (?, ?, ?, ?) 
+  ON DUPLICATE KEY UPDATE image = VALUES(image), min_price = VALUES(min_price), process_time_sec = VALUES(process_time_sec);`;
+  pool.query(
+    sql,
+    [machine.id, machine.image, machine.min_price, machine.process_time_sec],
+    (error) => {
+      if (error) {
+        console.error("Error executing query:", error);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
+      res.json({ message: `[CREATE][UPDATE] Create / update machine sucess` });
+    }
+  );
 });
 
-app.post("/api/stop", authorize, (req, res) => {
-  const id = req.body?.id;
-  console.log(`machine ${id} stops`);
-  res.json({ message: `machine [${id}] stops` });
+// UPDATE machine status (IDLE -> PROCESSING)
+app.post("/api/machine/start", authorize, (req, res) => {
+  const id = req.body.id;
+  const sql = `UPDATE machine SET status = 'PROCESSING' WHERE id = ?;`;
+  pool.query(sql, [id], (error) => {
+    if (error) {
+      console.error("Error executing query:", error);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+    res.json({
+      message: `[START] Update status of machine [${id}] to [PROCESSING]`,
+    });
+  });
+});
+
+// UPDATE machine status (PROCESSING -> IDLE)
+app.post("/api/machine/stop", authorize, (req, res) => {
+  const id = req.body.id;
+  const sql = `UPDATE machine SET status = 'IDLE' WHERE id = ?;`;
+  pool.query(sql, [id], (error) => {
+    if (error) {
+      console.error("Error executing query:", error);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+    res.json({
+      message: `[STOP] Update status of machine [${id}] to [IDLE]`,
+    });
+  });
+});
+
+// Delete machine
+app.delete("/api/machine", authorize, (req, res) => {
+  const id = req.body.id;
+  const sql = `DELETE FROM machine WHERE id = ?;`;
+  pool.query(sql, [id], (error) => {
+    if (error) {
+      console.error("Error executing query:", error);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+    res.json({
+      message: `[DELETE] Delete machine [${id}] success`,
+    });
+  });
 });
 
 app.listen(port, () => {
