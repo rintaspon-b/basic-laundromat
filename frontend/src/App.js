@@ -1,21 +1,21 @@
 import "./App.css";
+import { GetToken } from "./api/GetToken";
 import MachineTable from "./component/MachineTable";
 import { GetMachines } from "./api/GetMachines";
 
 function App() {
-
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QifSwiaWF0IjoxNjkyNzI2MjM3LCJleHAiOjE2OTI3NTUwMzd9.q6BQX7cba4Ychat0CUJLFsg3Th7Skhf2H2l-GRKgxuU";
-  const { data: machines } = GetMachines(token);
-  localStorage.setItem('token', token);
-
+  const { data: data } = GetToken();
+  if (data && data?.token) {
+    localStorage.setItem("token", data?.token);
+    // console.log("token: " + data?.token);
+  }
+  const { data: machines } = GetMachines();
   return (
     <div className="App">
       <h1>Basic Laundromat</h1>
-      {machines ? (<MachineTable machines={machines} />) : (<div>Loading...</div>)
-        }
+      {machines ? <MachineTable machines={machines} /> : <div>Loading...</div>}
     </div>
   );
 }
-
 
 export default App;
