@@ -7,7 +7,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - '4000:3000' #HOST PORT:CONTAINER PORT (OUTSIDE:INSIDE) [Default: 3000]
+      - '4000:4000' #HOST PORT:CONTAINER PORT (OUTSIDE:INSIDE) [Default: 3000]
     volumes:
       - ./backend/config.js:/app/config.js
     environment:

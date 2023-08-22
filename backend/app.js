@@ -29,23 +29,24 @@ app.get("/api/token", (req, res) => {
   const userId = req.query.userId;
   // find user by userid..
   const user = { id: 1, username: "test" };
-  // console.log(config.authorizer.secret);
   const token = jwt.sign({ user }, config.authorizer.secret, {
     expiresIn: "1h",
   });
-  // console.log(token);
   res.json({ token });
 });
 
 app.get("/api/machines", authorize, (req, res) => {
-  const machines = [
-    { id: 1, image: null, minPrice: 40, processTime: 90, status: "IDLE" },
-    { id: 2, image: null, minPrice: 40, processTime: 90, status: "PROCESSING" },
-    { id: 3, image: null, minPrice: 40, processTime: 90, status: "IDLE" },
-    { id: 4, image: null, minPrice: 40, processTime: 90, status: "IDLE" },
-    { id: 5, image: null, minPrice: 40, processTime: 90, status: "PROCESSING" },
-  ];
-  res.json(machines);
+  let machines = [];
+  const sql = `SELECT * FROM machine;`;
+  pool.query(sql, (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+    machines = results;
+    // console.log(machines);
+    res.json(machines);
+  });
 });
 
 app.post("/api/start", authorize, (req, res) => {
