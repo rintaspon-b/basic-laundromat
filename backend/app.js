@@ -37,6 +37,29 @@ app.get("/api/token", (req, res) => {
   res.json({ token });
 });
 
+app.get("/api/machines", authorize, (req, res) => {
+  const machines = [
+    { id: 1, image: null, minPrice: 40, processTime: 90, status: "IDLE" },
+    { id: 2, image: null, minPrice: 40, processTime: 90, status: "PROCESSING" },
+    { id: 3, image: null, minPrice: 40, processTime: 90, status: "IDLE" },
+    { id: 4, image: null, minPrice: 40, processTime: 90, status: "IDLE" },
+    { id: 5, image: null, minPrice: 40, processTime: 90, status: "PROCESSING" },
+  ];
+  res.json(machines);
+});
+
+app.post("/api/start", authorize, (req, res) => {
+  const id = req.body?.id;
+  console.log(`machine ${id} starts`);
+  res.json({ message: `machine [${id}] starts` });
+});
+
+app.post("/api/stop", authorize, (req, res) => {
+  const id = req.body?.id;
+  console.log(`machine ${id} stops`);
+  res.json({ message: `machine [${id}] stops` });
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
