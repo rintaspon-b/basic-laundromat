@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "625f9a31-5a50-4c23-8d40-6109d0a96ae1",
 		"name": "basic-laundromat",
+		"description": "basic laundromat เป็นการจำลองระบบเการทำงานของเครื่องซักผ้าหยอดเหรียญในชีวิตจริง โดยมีการเขียน api เพื่อเป็นตัวแทนคำสั่งทำงานระหว่างผู้ใช้งานและระบบดังนี้... (ดูเพิ่มเติม)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "1688426"
 	},
@@ -27,7 +28,8 @@
 							"value": "1"
 						}
 					]
-				}
+				},
+				"description": "ใช้สำหรับเรียก JWT Token เพื่อใช้ในการ Authorization (สมมติให้สามารถเรียกได้เลยโดยไม่ต้องใช้ Username / Password) (Token มีอายุ 8 ชม.)"
 			},
 			"response": []
 		},
@@ -62,7 +64,8 @@
 							"value": "1"
 						}
 					]
-				}
+				},
+				"description": "ใช้สำหรับทดสอบการเรียก API"
 			},
 			"response": []
 		},
@@ -98,7 +101,8 @@
 							"value": "true"
 						}
 					]
-				}
+				},
+				"description": "ใช้สำหรับทดสอบการส่งข้อความไปยัง LINE group\n\nuserTimer = true หมายถึง จะให้โปรแกรมหน่วงเวลาตอนส่งข้อความ โดยการหน่วงเวลาจะเริ่มต้นที่ 60 วินาทีก่อนหมดเวลา"
 			},
 			"response": []
 		},
@@ -110,7 +114,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QifSwiaWF0IjoxNjkyNjk3MjAxLCJleHAiOjE2OTI3MjYwMDF9.LePdRIkYB0t3VW6aTpAmUoetdUTyG5MANfrH3AeBvMY",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3QifSwiaWF0IjoxNjkyNzI2MTUzLCJleHAiOjE2OTI3NTQ5NTN9.21pKNQlY4Mj61oKqk90cKyXhoOf7Bu08dL8WpPE9R30",
 							"type": "string"
 						}
 					]
@@ -118,7 +122,8 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:4000/api/machines",
+					"raw": "http://localhost:4000/api/machines",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
@@ -127,7 +132,8 @@
 						"api",
 						"machines"
 					]
-				}
+				},
+				"description": "ใช้สำหรับแสดงจำนวนเครื่องซักผ้า (machine) ทั้งหมดพร้อมสถานะของ machine นั้นโดยที่\n\n- id = ID ของเครื่อง\n    \n- image = รูปภาพของเครื่อง\n    \n- min_price = ราคขั้นต่ำเพื่อให้เครื่องทำงาน (ลูกค้าต้องหยอดเหรียญให้เกินค่านี้)\n    \n- process_time_sec = ระยะเวลาที่เครื่องนี้ใช้ซักผ้า 1 ครั้ง\n    \n- status = สถานะของเครื่อง โดย IDLE =ว่าง และ PROCESSING = ทำงานอยู่\n    \n\n``` json\n[\n    {\n        \"id\": 1,\n        \"image\": \"https://iili.io/Hp8jR3P.png\",\n        \"min_price\": 50,\n        \"process_time_sec\": 90,\n        \"status\": \"IDLE\"\n    },\n    {\n        \"id\": 2,\n        \"image\": \"https://iili.io/Hp8jTGV.png\",\n        \"min_price\": 100,\n        \"process_time_sec\": 150,\n        \"status\": \"IDLE\"\n    },\n    {\n        \"id\": 3,\n        \"image\": \"https://iili.io/Hp8ju6B.png\",\n        \"min_price\": 50,\n        \"process_time_sec\": 90,\n        \"status\": \"IDLE\"\n    },\n    {\n        \"id\": 4,\n        \"image\": \"https://iili.io/Hp8j5a1.png\",\n        \"min_price\": 60,\n        \"process_time_sec\": 70,\n        \"status\": \"IDLE\"\n    },\n    {\n        \"id\": 5,\n        \"image\": \"https://iili.io/Hp8j78F.png\",\n        \"min_price\": 35,\n        \"process_time_sec\": 65,\n        \"status\": \"IDLE\"\n    }\n]\n\n ```"
 			},
 			"response": []
 		},
@@ -165,7 +171,8 @@
 						"api",
 						"machine"
 					]
-				}
+				},
+				"description": "ใช้สำหรับนำข้อมูลเครื่องซักผ้า (machine) เข้าระบบ โดยสถานะเริ่มต้นของเครื่องจะเป็น IDLE\n\n- image = รูปภาพของเครื่อง\n    \n- min_price = ราคขั้นต่ำเพื่อให้เครื่องทำงาน (ลูกค้าต้องหยอดเหรียญให้เกินค่านี้)\n    \n- process_time_sec = ระยะเวลาที่เครื่องนี้ใช้ซักผ้า 1 ครั้ง"
 			},
 			"response": []
 		},
@@ -204,7 +211,8 @@
 						"machine",
 						"start"
 					]
-				}
+				},
+				"description": "ใช้สำหรับสั่งให้เครื่องซักผ้าทำงาน โดยสิ่งที่ต้องการคือ id ของเครื่องและระยะเวลาที่ต้องการให้เครื่่องซักผ้านี้ทำงาน\n\n- id = id ของเครื่อง\n    \n- processTime = ระยะเวลาที่ต้องการให้เครื่่องซักผ้านี้ทำงาน"
 			},
 			"response": []
 		},
@@ -243,7 +251,8 @@
 						"machine",
 						"stop"
 					]
-				}
+				},
+				"description": "ใช้สำหรับสั่งให้เครื่องซักผ้าหยุดทำงานทันที โดยสิ่งที่ต้องการคือ id ของเครื่อง\n\n- id = id ของเครื่อง"
 			},
 			"response": []
 		},
@@ -281,7 +290,8 @@
 						"api",
 						"machine"
 					]
-				}
+				},
+				"description": "ใช้สำหรับลบเครื่องซักผ้าออกจากระบบ โดยสิ่งที่ต้องการคือ id ของเครื่อง\n\n- id = id ของเครื่อง"
 			},
 			"response": []
 		}
